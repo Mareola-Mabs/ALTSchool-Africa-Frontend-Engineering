@@ -1,0 +1,77 @@
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.dark{
+    background: black;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+    line-height: 1.5;
+    background: #fff;
+    color: #222;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    font: inherit;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+/* End of Resets */
+
+/* The top Nav */
+.top__nav{
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    padding-right: 20px;
+}
+.top__nav-mode{
+    width: 50px;
+    height: 25px;
+    border-radius: 12px;
+    background: #cecccd;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 2px grey, inset -1px -1px 2px white;
+}
+
+.top__nav-mode--cntrl{
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: white;
+    margin-left: 3px;
+    transition: 0.5s;
+}
+
+.top__nav-mode--cntrl.dark{
+    background: black;
+    margin-left: 29px;
+}
+
+/* End of The top Nav */
+
