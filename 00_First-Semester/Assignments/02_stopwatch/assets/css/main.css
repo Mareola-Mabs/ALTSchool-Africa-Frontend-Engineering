@@ -15,8 +15,8 @@ body.dark{
     background: black;
 }
 
-html, body {
-    height: 100%;
+body {
+    height: 100vh;
     width: 100%;
     font-family: sans-serif;
     line-height: 1.5;
@@ -24,11 +24,6 @@ html, body {
     color: #222;
 }
 
-img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
 
 button, input, select, textarea {
     font: inherit;
@@ -42,6 +37,14 @@ a {
     text-decoration: none;
 }
 /* End of Resets */
+
+/* Disable Webkit tap highlight color */
+html, * {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none; /* Disable text selection */
+}
+/* End of Webkit tap highlight color */
+
 
 /* The top Nav */
 .top__nav{
