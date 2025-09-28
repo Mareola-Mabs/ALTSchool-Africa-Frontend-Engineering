@@ -75,6 +75,15 @@ startBtn.addEventListener('click', ()=>{
     }
 })
 
+/* Reset button */
+resetBtn.addEventListener('click', ()=>{
+    isStarted = 0
+    clearInterval(timerId)
+    screenItems.forEach(item =>{
+        item.textContent = "00"
+    })
+})
+
 
 
 
