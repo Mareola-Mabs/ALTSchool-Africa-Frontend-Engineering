@@ -1,41 +1,81 @@
-// // The Stopwatch Functionality
+// Importing Getter Functions
+import { Q_getter, Q_getterAll } from './getters.js'
 
-// const hour_screen = Q_getter('.hour')
-// const minute_screen = Q_getter('.minute')
-// const sec_screen = Q_getter('.seconds')
-// const milliSec_screen = Q_getter('.milliSeconds')
+// The Stopwatch Functionality
+/* Grab screen elements into an array */
+const screenItems = [Q_getter('.hour'), Q_getter('.minute'), Q_getter('.seconds'), Q_getter('.milliSeconds')]
 
-// const startBtn = Q_getter('.buttons__start')
-// const pauseBtn = Q_getter('.buttons__pause')
-// const resetBtn = Q_getter('.buttons__reset')
+/* Destructure screen elements */
+const [hour_screen, minute_screen, sec_screen, milliSec_screen] = screenItems
 
-// let isStarted = false
+/* Grab button elements into an array */
+const btnItems = [Q_getter('.buttons__start'), Q_getter('.buttons__pause'), Q_getter('.buttons__reset')]
 
-// startBtn.addEventListener('click', ()=>{
-//     isStarted = true
+/* Destructure button elements */
+const [startBtn, pauseBtn, resetBtn] = btnItems
 
-//     if (isStarted === true){
-//         milliSec_screen_conv = Number(milliSec_screen.textContent)
-
-//         sec_screen_conv = Number(sec_screen.textContent)
-//         minute_screen_conv = Number(minute_screen.textContent)
+let isStarted = 0
+let timerId
 
 
-//         setInterval(()=>{
+// Stopwatch Functionality
+/* Defining Timer Function */
+function startTimer(){
+    timerId = setInterval(() => {
+        let convertedMilliSec = Number(milliSec_screen.textContent)
+        convertedMilliSec++
+        let hiddenConvertedMilliSec = convertedMilliSec + 1
+        milliSec_screen.textContent = String(convertedMilliSec).padStart(2, "0")
 
-//             milliSec_screen_conv += 1
-//             milliSec_screen_conv_dup = milliSec_screen_conv + 1
+        
 
-//             milliSec_screen.textContent = String(milliSec_screen_conv).padStart(2, "0")
+        if (hiddenConvertedMilliSec === 100){
+            convertedMilliSec = 0
+            milliSec_screen.textContent = String(convertedMilliSec).padStart(2, "0")
 
-            
+            let convertedSec = Number(sec_screen.textContent)
+            convertedSec++
+            let hiddenConvertedSec = convertedSec + 1
+            sec_screen.textContent = String(convertedSec).padStart(2, "0")
+
+            if (hiddenConvertedSec === 60){
+                convertedSec = 0
+                sec_screen.textContent = String(convertedSec).padStart(2, "0")
+
+                let convertedMinute = Number(minute_screen.textContent)
+                convertedMinute++
+                let hiddenConvertedMinute = convertedMinute + 1
+                minute_screen.textContent = String(convertedMinute).padStart(2, "0")
+
+                if (hiddenConvertedMinute === 60){
+                    convertedMinute = 0
+                    minute_screen.textContent = String(convertedMinute).padStart(2, "0")
+
+                    let convertedHour = Number(hour_screen.textContent)
+                    convertedHour++
+                    // let hiddenConvertedMinute = convertedMinute + 1
+                    hour_screen.textContent = String(convertedHour).padStart(2, "0")
+                }
+            }
+
+
+        }
+        
+    }, 10)
+}
+
+
+/* Start button */
+startBtn.addEventListener('click', ()=>{
+    isStarted ++ // This will help check if clock has started
+    if (isStarted === 1) {
+        startTimer()
+    } else {
+        isStarted = 1 // Prevent multiple intervals
+    }
+})
 
 
 
 
-//         }, 10)
 
-    
-//     }
-
-// })

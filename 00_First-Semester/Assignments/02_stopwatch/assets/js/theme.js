@@ -55,5 +55,3 @@ i = localStorage.getItem("i")
         })
     }
 // End of Dark Mode Toggle
-
-
