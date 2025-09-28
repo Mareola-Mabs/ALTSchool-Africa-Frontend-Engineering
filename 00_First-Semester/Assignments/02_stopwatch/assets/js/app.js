@@ -16,7 +16,7 @@ const [startBtn, pauseBtn, resetBtn] = btnItems
 
 let isStarted = 0
 let timerId
-
+let timeHolder = ["00", "00", "00", "00"]
 
 // Stopwatch Functionality
 /* Defining Timer Function */
@@ -26,6 +26,10 @@ function startTimer(){
         convertedMilliSec++
         let hiddenConvertedMilliSec = convertedMilliSec + 1
         milliSec_screen.textContent = String(convertedMilliSec).padStart(2, "0")
+
+        /* Time holder */
+        timeHolder = [Q_getter('.hour').textContent, Q_getter('.minute').textContent, Q_getter('.seconds').textContent, Q_getter('.milliSeconds').textContent]
+
 
         
 
@@ -65,7 +69,7 @@ function startTimer(){
 }
 
 
-/* Start button */
+/* Start feature */
 startBtn.addEventListener('click', ()=>{
     isStarted ++ // This will help check if clock has started
     if (isStarted === 1) {
@@ -75,16 +79,39 @@ startBtn.addEventListener('click', ()=>{
     }
 })
 
-/* Reset button */
+/* Pause Feature */
+pauseBtn.addEventListener('click', ()=>{
+    isStarted = 0
+    clearInterval(timerId)
+
+    // Set the contents of the Timer
+    screenItems[0].textContent = timeHolder[0]
+    screenItems[1].textContent = timeHolder[1]
+    screenItems[2].textContent = timeHolder[2]
+    screenItems[3].textContent = timeHolder[3]
+})
+
+
+/* Reset feature */
 resetBtn.addEventListener('click', ()=>{
     isStarted = 0
+
     clearInterval(timerId)
     screenItems.forEach(item =>{
         item.textContent = "00"
     })
+
+    // Clear the timeholder
+    timeHolder[0] = "00"
+    timeHolder[1] = "00"
+    timeHolder[2] = "00"
+    timeHolder[3] = "00"
 })
 
 
+
+
+// End of Stopwatch Functionality
 
 
 
