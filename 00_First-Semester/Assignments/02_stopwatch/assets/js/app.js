@@ -70,17 +70,20 @@ function startTimer(){
 
 
 /* Start feature */
-startBtn.addEventListener('click', ()=>{
+function start(){
     isStarted ++ // This will help check if clock has started
     if (isStarted === 1) {
         startTimer()
     } else {
         isStarted = 1 // Prevent multiple intervals
     }
+}
+startBtn.addEventListener('click', ()=>{
+    return start()
 })
 
 /* Pause Feature */
-pauseBtn.addEventListener('click', ()=>{
+function pause(){
     isStarted = 0
     clearInterval(timerId)
 
@@ -89,11 +92,14 @@ pauseBtn.addEventListener('click', ()=>{
     screenItems[1].textContent = timeHolder[1]
     screenItems[2].textContent = timeHolder[2]
     screenItems[3].textContent = timeHolder[3]
+}
+pauseBtn.addEventListener('click', ()=>{
+    return pause()
 })
 
 
 /* Reset feature */
-resetBtn.addEventListener('click', ()=>{
+function reset(){
     isStarted = 0
 
     clearInterval(timerId)
@@ -106,6 +112,19 @@ resetBtn.addEventListener('click', ()=>{
     timeHolder[1] = "00"
     timeHolder[2] = "00"
     timeHolder[3] = "00"
+}
+resetBtn.addEventListener('click', ()=>{
+    return reset()
+})
+
+
+// Keypress Feature
+let p = 0
+window.addEventListener('keypress', (e)=>{
+    if (e.key === " " || e.key === "Spacebar"){
+        p++
+        p % 2 === 1? start() : pause()
+    }
 })
 
 
