@@ -2,6 +2,8 @@
 import { Q_getter, Q_getterAll } from './getters.js'
 
 // The Stopwatch Functionality
+const splitBtn = Q_getter('.buttons-lap')
+const lap = Q_getter('.lap')
 /* Grab screen elements into an array */
 const screenItems = [Q_getter('.hour'), Q_getter('.minute'), Q_getter('.seconds'), Q_getter('.milliSeconds')]
 
@@ -101,6 +103,8 @@ pauseBtn.addEventListener('click', ()=>{
 /* Reset feature */
 function reset(){
     isStarted = 0
+    lap.textContent = ""
+    lap.style.display = "none"
 
     clearInterval(timerId)
     screenItems.forEach(item =>{
@@ -118,7 +122,7 @@ resetBtn.addEventListener('click', ()=>{
 })
 
 
-// Keypress Feature
+/* Keypress feature */
 let p = 0
 window.addEventListener('keypress', (e)=>{
     if (e.key === " " || e.key === "Spacebar"){
@@ -128,6 +132,20 @@ window.addEventListener('keypress', (e)=>{
 })
 
 
+/* Time split feature */
+splitBtn.addEventListener('click', ()=>{
+    if (isStarted === 1) {
+        lap.style.display = "grid"
+        
+
+        const newTime = document.createElement('div')
+        newTime.textContent = `${timeHolder[0]}.${timeHolder[1]}.${timeHolder[2]}.${timeHolder[3]}`
+        lap.appendChild(newTime)
+
+        lap.scrollTop = lap.scrollHeight - 70 // Adjust scrollHeight onSplit
+        
+    } 
+})
 
 
 // End of Stopwatch Functionality
