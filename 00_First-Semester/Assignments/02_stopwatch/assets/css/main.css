@@ -136,6 +136,7 @@ main{
 .screen{
     font-size: 7rem;
     font-family: 'Bebas Neue', sans-serif;
+    display: flex;
 }
 
 .screen.dark{
@@ -204,4 +205,5 @@ main{
 }
 
 /* End of Main */
+
 
