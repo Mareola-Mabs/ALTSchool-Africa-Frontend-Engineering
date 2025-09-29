@@ -4,78 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
 
-    <title>Stopwatch App</title>
-    
-    <meta name="description" content="Stopwatch App, Clock, Watch"> 
-    <meta property="og:title" content="Home - Page">  
-    <meta property="og:url" content="https://www.example.com/page"> 
-    <meta property="og:description" content="Stopwatch App, Clock, Watch">  
-    <meta property="og:image:alt" content=""> 
-    <meta property="og:locale" content="en_US">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content=""> 
-    <link rel="canonical" href="">
-    <link rel="icon" href="">
-    <link rel="icon" href="" type="">
-    <link rel="apple-touch-icon" href="">
-    <link rel="manifest" href=""> 
-    <meta name="theme-color" content="#FF00FF"> 
+    <title>Oreoluwa's Stopwatch</title>
     <link rel="stylesheet" type="text/css" href="./assets/css/main.css">  <!-- Css Styles -->
-    <link rel="stylesheet" type="text/css" href="./assets/css/media.css">  <!-- Responsiveness -->
     <link rel="stylesheet" href="" media="print">
 </head>
 <body>
-    <!-- Content -->
     
-    <nav class="top__nav">
-        <div class="top__nav-mode">
-            <div class="top__nav-mode--cntrl">
+    <div class="circle">
+        <div class="progress" id="progress"></div>
+        <div class="timer" id="display">00:00.00</div>
+    </div>
 
-            </div>
-        </div>
-    </nav>
+    <div class="buttons">
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="reset()">Reset</button>
+        <button onclick="lap()">Lap</button>
+    </div>
 
-    <!-- The container -->
-    <main class="container">
-        <!-- Lap Timer -->
-        <section class="lap">
-
-        </section>
-        <!-- End of Lap Time -->
-
-        <!-- Screen Container -->
-        <section class="screen">
-          <section><span class="hour">00</span>.</section>  
-          <section><span class="minute">00</span>. </section> 
-          <section><span class="seconds">00</span>.</section>  
-          <section><span class="milliSeconds">00</span></section>  
-        </section>
-        <!-- End of Screen Container -->
-
-
-
-
-        <!-- The Buttons -->
-         <section class="buttons">
-            <button class="buttons__start">Start</button>
-            <button class="buttons__pause">Pause</button>
-            <button class="buttons__reset">Reset</button>
-
-            <section class="buttons__other">
-                <button class="buttons-lap">Split</button>
-            </section>
-         </section>
-        <!-- End of Buttons -->
-    </main>
-    <!-- End of Container -->
-    
-
-    
-    
-    
+    <div class="laps" id="laps"></div>
     
     <!-- Scripts -->
-    <script src="./assets/js/theme.js" type="module" defer></script>
-    <script src="./assets/js/app.js" type="module" defer></script>
+    <script src="./assets/js/theme.js" defer></script>
+    <script src="./assets/js/app.js" defer></script>
 </body>
 </html>

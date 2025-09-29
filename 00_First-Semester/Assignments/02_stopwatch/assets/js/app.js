@@ -1,154 +1,58 @@
-// Importing Getter Functions
-import { Q_getter, Q_getterAll } from './getters.js'
+let startTime;
+let elapsed = 0;
+let isRunning = false;
+let lapsArray = [];
 
-// The Stopwatch Functionality
-const splitBtn = Q_getter('.buttons-lap')
-const lap = Q_getter('.lap')
-/* Grab screen elements into an array */
-const screenItems = [Q_getter('.hour'), Q_getter('.minute'), Q_getter('.seconds'), Q_getter('.milliSeconds')]
-
-/* Destructure screen elements */
-const [hour_screen, minute_screen, sec_screen, milliSec_screen] = screenItems
-
-/* Grab button elements into an array */
-const btnItems = [Q_getter('.buttons__start'), Q_getter('.buttons__pause'), Q_getter('.buttons__reset')]
-
-/* Destructure button elements */
-const [startBtn, pauseBtn, resetBtn] = btnItems
-
-let isStarted = 0
-let timerId
-let timeHolder = ["00", "00", "00", "00"]
-
-// Stopwatch Functionality
-/* Defining Timer Function */
-function startTimer(){
-    timerId = setInterval(() => {
-        let convertedMilliSec = Number(milliSec_screen.textContent)
-        convertedMilliSec++
-        let hiddenConvertedMilliSec = convertedMilliSec + 1
-        milliSec_screen.textContent = String(convertedMilliSec).padStart(2, "0")
-
-        /* Time holder */
-        timeHolder = [Q_getter('.hour').textContent, Q_getter('.minute').textContent, Q_getter('.seconds').textContent, Q_getter('.milliSeconds').textContent]
-
-
-        
-
-        if (hiddenConvertedMilliSec === 100){
-            convertedMilliSec = 0
-            milliSec_screen.textContent = String(convertedMilliSec).padStart(2, "0")
-
-            let convertedSec = Number(sec_screen.textContent)
-            convertedSec++
-            let hiddenConvertedSec = convertedSec + 1
-            sec_screen.textContent = String(convertedSec).padStart(2, "0")
-
-            if (hiddenConvertedSec === 60){
-                convertedSec = 0
-                sec_screen.textContent = String(convertedSec).padStart(2, "0")
-
-                let convertedMinute = Number(minute_screen.textContent)
-                convertedMinute++
-                let hiddenConvertedMinute = convertedMinute + 1
-                minute_screen.textContent = String(convertedMinute).padStart(2, "0")
-
-                if (hiddenConvertedMinute === 60){
-                    convertedMinute = 0
-                    minute_screen.textContent = String(convertedMinute).padStart(2, "0")
-
-                    let convertedHour = Number(hour_screen.textContent)
-                    convertedHour++
-                    // let hiddenConvertedMinute = convertedMinute + 1
-                    hour_screen.textContent = String(convertedHour).padStart(2, "0")
-                }
-            }
-
-
-        }
-        
-    }, 10)
+function formatTime(ms) {
+  const totalCentis = Math.floor(ms / 10);
+  const mins = String(Math.floor(totalCentis / 6000)).padStart(2, "0");
+  const secs = String(Math.floor((totalCentis % 6000) / 100)).padStart(2, "0");
+  const centis = String(totalCentis % 100).padStart(2, "0");
+  return `${mins}:${secs}.${centis}`;
 }
 
+function updateDisplay() {
+  const now = Date.now();
+  const diff = isRunning ? elapsed + (now - startTime) : elapsed;
 
-/* Start feature */
-function start(){
-    isStarted ++ // This will help check if clock has started
-    if (isStarted === 1) {
-        startTimer()
-    } else {
-        isStarted = 1 // Prevent multiple intervals
-    }
+  document.getElementById("display").textContent = formatTime(diff);
+
+
+  const deg = ((diff % 60000) / 60000) * 360;
+  document.getElementById("progress").style.transform = `rotate(${deg}deg)`;
+
+  if (isRunning) requestAnimationFrame(updateDisplay);
 }
-startBtn.addEventListener('click', ()=>{
-    return start()
-})
 
-/* Pause Feature */
-function pause(){
-    isStarted = 0
-    clearInterval(timerId)
-
-    // Set the contents of the Timer
-    screenItems[0].textContent = timeHolder[0]
-    screenItems[1].textContent = timeHolder[1]
-    screenItems[2].textContent = timeHolder[2]
-    screenItems[3].textContent = timeHolder[3]
+function start() {
+  if (!isRunning) {
+    isRunning = true;
+    startTime = Date.now();
+    requestAnimationFrame(updateDisplay);
+  }
 }
-pauseBtn.addEventListener('click', ()=>{
-    return pause()
-})
 
-
-/* Reset feature */
-function reset(){
-    isStarted = 0
-    lap.textContent = ""
-    lap.style.display = "none"
-
-    clearInterval(timerId)
-    screenItems.forEach(item =>{
-        item.textContent = "00"
-    })
-
-    // Clear the timeholder
-    timeHolder[0] = "00"
-    timeHolder[1] = "00"
-    timeHolder[2] = "00"
-    timeHolder[3] = "00"
+function stop() {
+  if (isRunning) {
+    elapsed += Date.now() - startTime;
+    isRunning = false;
+  }
 }
-resetBtn.addEventListener('click', ()=>{
-    return reset()
-})
 
+function reset() {
+  isRunning = false;
+  elapsed = 0;
+  lapsArray = [];
+  document.getElementById("display").textContent = "00:00.00";
+  document.getElementById("progress").style.transform = "rotate(0deg)";
+  document.getElementById("laps").innerHTML = "";
+}
 
-/* Keypress feature */
-let p = 0
-window.addEventListener('keypress', (e)=>{
-    if (e.key === " " || e.key === "Spacebar"){
-        p++
-        p % 2 === 1? start() : pause()
-    }
-})
-
-
-/* Time split feature */
-splitBtn.addEventListener('click', ()=>{
-    if (isStarted === 1) {
-        lap.style.display = "grid"
-        
-
-        const newTime = document.createElement('div')
-        newTime.textContent = `${timeHolder[0]}.${timeHolder[1]}.${timeHolder[2]}.${timeHolder[3]}`
-        lap.appendChild(newTime)
-
-        lap.scrollTop = lap.scrollHeight - 70 // Adjust scrollHeight onSplit
-        
-    } 
-})
-
-
-// End of Stopwatch Functionality
-
-
-
+function lap() {
+  const now = isRunning ? elapsed + (Date.now() - startTime) : elapsed;
+  const timeStr = formatTime(now);
+  lapsArray.push(timeStr);
+  const lapDiv = document.createElement("div");
+  lapDiv.textContent = `Lap ${lapsArray.length}: ${timeStr}`;
+  document.getElementById("laps").prepend(lapDiv);
+}

@@ -1,209 +1,89 @@
-/* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
-
-/* CSS Reset */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body.dark{
-    background: black;
-}
-
 body {
-    height: 100vh;
-    width: 100%;
-    font-family: sans-serif;
-    line-height: 1.5;
-    background: #fff;
-    color: #222;
-    transition: 1s;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #000;
+  font-family: "Arial", sans-serif;
 }
 
-
-button, input, select, textarea {
-    font: inherit;
-    background: none;
-    border: none;
-    outline: none;
+.circle {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid rgba(0, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px #fff inset;
 }
 
-/* End of Resets */
-
-/* Disable Webkit tap highlight color */
-html, * {
-    -webkit-tap-highlight-color: transparent;
-    user-select: none; /* Disable text selection */
-}
-/* End of Webkit tap highlight color */
-
-
-/* The top Nav */
-.top__nav{
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    align-items: center;
-    padding-right: 20px;
-    position: absolute;
-}
-.top__nav-mode{
-    width: 50px;
-    height: 25px;
-    border-radius: 12px;
-    background: #cecccd;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: inset 2px 2px 2px grey, inset -1px -1px 2px white;
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+  transform: rotate(0deg);
+  box-shadow: 0 0 20px #fff;
 }
 
-.top__nav-mode--cntrl{
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    background: white;
-    margin-left: 3px;
-    transition: 0.5s;
+.timer {
+  position: relative;
+  font-size: 2.5rem;
+  color: #fff; 
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+  z-index: 2;
 }
 
-.top__nav-mode--cntrl.dark{
-    background: black;
-    margin-left: 29px;
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem; 
+  margin-bottom: 1rem;
 }
 
-/* End of The top Nav */
-
-
-/* The Main */
-main{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.buttons button {
+  flex: 1 1 100px; 
+  max-width: 120px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 0 0 5px #fff;
+  box-shadow: 0 0 5px #fff, inset 0 0 5px #fff;
 }
 
-/* The Lap/Split Timer */
-.lap{
-
-    height: 60px;
-    width: 300px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: inset 2px 2px 4px #bebebe, inset -2px -2px 4px #ffffff;
-    display: grid;
-    grid-template-columns: 1fr;
-    place-items: center;
-    overflow-y: scroll;
-    padding: 10px;
-    padding-bottom: 0;
-    display: none;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    margin-bottom: 30px;
-
-    /* Custom scrollbar styling */
-    scrollbar-width: thin;
-    scrollbar-color: #bdbdbd #fff;
-
-    &::-webkit-scrollbar {
-        width: 8px;
-        border-radius: 8px;
-        background: #e0e0e0;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: #756a6a;
-        border-radius: 8px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background: #a0a0a0;
-    }
-}
-/* End of Lap/Split Timer */
-
-/* Screen */
-.screen{
-    font-size: 7rem;
-    font-family: 'Bebas Neue', sans-serif;
-    display: flex;
+.buttons button:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 20px #fff, 0 0 40px #fff;
 }
 
-.screen.dark{
-    color: white;
+.laps {
+  margin-top: 1.5rem;
+  width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  color: #fff;
+  text-shadow: 0 0 5px #fff;
+  border: 1px solid #fff;
+  padding: 0.5rem;
+  border-radius: 1rem;
 }
 
-/* Buttons */
-.buttons{
-    margin-top: 30px;
-    display: flex;
-    gap: 20px;
+.laps div {
+  margin: 0.2rem 0;
 }
-
-.buttons__start, .buttons__pause, .buttons__reset{
-    width: 100px;
-    height: 100px;
-    background: #e0e0e0;
-    border-radius: 50%;
-    box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    color: #333;
-    cursor: pointer;
-    transition: box-shadow 0.2s, background 0.2s;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 500; /* medium weight for visibility */
-}
-
-.buttons__start:active, .buttons__pause:active, .buttons__reset:active {
-    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
-    background: #d1d1d1;
-}
-
-.buttons-lap{
-    width: 80px;
-    height: 40px;
-    background: #e0e0e0;
-    border-radius: 25px;
-    box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    color: #333;
-    cursor: pointer;
-    transition: box-shadow 0.2s, background 0.2s;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 500; /* medium weight for visibility */
-}
-
-.buttons__start.dark, .buttons__pause.dark, .buttons__reset.dark, .buttons-lap.dark{
-    box-shadow: none;
-    transition: none;
-}
-
-.buttons__start.dark:active, .buttons__pause.dark:active, .buttons__reset.dark:active, .buttons-lap.dark:active{
-    box-shadow: inset 4px 4px 8px grey, inset -3px -3px 6px white;
-
-}
-
-.buttons-lap:active {
-    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
-    background: #d1d1d1;
-}
-
-/* End of Main */
-
-
