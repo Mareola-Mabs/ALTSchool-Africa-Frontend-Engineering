@@ -1,0 +1,89 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #b12524;
+  font-family: "Arial", sans-serif;
+}
+
+.circle {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid rgba(0, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px #fff inset;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid #fadb67;
+  clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+  transform: rotate(0deg);
+  box-shadow: 0 0 20px #fadb67;
+}
+
+.timer {
+  position: relative;
+  font-size: 2.5rem;
+  color: #fff; 
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+  z-index: 2;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem; 
+  margin-bottom: 1rem;
+}
+
+.buttons button {
+  flex: 1 1 100px; 
+  max-width: 120px;
+  background: #fadb67;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 0 0 5px #fff;
+  box-shadow: 0 0 5px #fff, inset 0 0 5px #fff;
+}
+
+.buttons button:hover {
+  background: transparent;
+  color: #000;
+  box-shadow: 0 0 20px #fff, 0 0 40px #fff;
+}
+
+.laps {
+  margin-top: 1.5rem;
+  width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  color: #fff;
+  text-shadow: 0 0 5px #fff;
+  border: 1px solid #fff;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.laps div {
+  margin: 0.2rem 0;
+}
