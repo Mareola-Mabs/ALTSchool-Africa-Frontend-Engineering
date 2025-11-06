@@ -18,7 +18,6 @@ export const NewListItems = ()=>{
 }
 
 newListItems = NewListItems()
-console.log(newListItems)
 
 
 
