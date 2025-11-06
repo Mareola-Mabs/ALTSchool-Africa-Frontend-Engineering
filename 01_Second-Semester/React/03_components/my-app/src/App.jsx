@@ -1,16 +1,20 @@
 // Importing Components
 import UserProfileCard from "./components/ProfileCard"
+import UserProfile from "./components/UserProfile"
 
 
 
 // Create root Component
 const App = () =>{
   return (
-    <section className="main__page">
-      
+    <div className="main__page">
+
       {/* Call The UserProfileCard Component */}
       <UserProfileCard/>
-    </section>
+
+
+      <UserProfile/>
+    </div>
   )
 }
 
