@@ -1,32 +1,7 @@
-// Create a Component
-const About = ()=>{
-  return (
-    <p>Hello There! Good Morning</p>
-  )
-}
-
-// User Profile card Component
-const UserProfileCard = ()=>{
-  return(
-    <div>
-      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar" style={{width:100}}/>
-      <div className="name">Obama Barack</div>
-    </div>
-  )
-}
-
-
-// Working With Lists
-const ListItem = ()=>{
-  const listItems = ['Ford', 'Toyota', 'Mercedes', 'Ferrari']
-  
-  return listItems.map(item => {
-    return <li key={item}>{item}</li>
-  })
-}
-
-
-
+// Importing Components
+import Greeting from "./components/Greeting"
+import UserProfileCard from "./components/ProfileCard"
+import {ListItem, NewListItems, newListItems} from './components/ListItem'
 
 
 // Create root Component
@@ -36,11 +11,12 @@ const App = () =>{
       {/* Call The UserProfileCard Component */}
       <UserProfileCard/>
 
-      {/* Call The About Component */}
-      <About/>
+      {/* Call The Greeting Component */}
+      <Greeting/>
 
       <ol>
         <ListItem/>
+        {newListItems}
       </ol>
     </section>
   )
