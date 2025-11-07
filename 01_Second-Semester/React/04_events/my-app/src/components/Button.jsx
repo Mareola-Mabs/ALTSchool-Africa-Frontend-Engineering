@@ -14,10 +14,10 @@ export default function Button(){
 
 
     const increment = ()=>{
-        setCounter(prev => prev + 1)
+        setCounter(counter + 1)
     }
     const decrement = ()=>{
-        setCounter(prev => prev - 1)
+        setCounter(counter - 1)
     }
 
     return <div>
