@@ -12,13 +12,10 @@ const Content = ()=>{
 const Content2 = ()=>{
   const [counter, setCounter] = useState(0)
 
-  useEffect(()=>{
     counter >=1? console.log("Counter Changed") : null
-  }, [counter])
 
   return <button onClick={()=>setCounter(counter + 1)}>Click Me</button>
 }
-
 
 
 const Loader = ()=>{
