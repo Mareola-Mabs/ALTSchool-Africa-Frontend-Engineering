@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+body{
+    background: rgba(3, 7, 18, 1);
+}
+
+@theme{
+    --color-nav-border: rgba(29, 32, 43, 1.0)
+}

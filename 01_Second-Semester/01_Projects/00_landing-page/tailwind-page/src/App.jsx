@@ -1,3 +1,4 @@
+import Nav from './components/00_Nav'
 import './App.css'
 
 
@@ -5,8 +6,8 @@ import './App.css'
 const App = () => {
 
   return (
-      <div className='text-3xl font-bold underline bg-red-500'>
-        Hello World
+      <div>
+        <Nav/>
       </div>
 
   )
