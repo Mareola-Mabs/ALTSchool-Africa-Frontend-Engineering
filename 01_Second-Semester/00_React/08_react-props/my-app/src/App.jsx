@@ -9,6 +9,13 @@ const Car = (props) => {
   return <div className="car">{`${props.data.brand} ${props.model}`}</div>;
 };
 
+// Using Special Props
+const Nav = (props)=>{
+  return(
+    <div>{props.children}{props.size}</div>
+  )
+}
+
 // Create root Component
 const App = () => {
   const data = {
@@ -54,6 +61,10 @@ const App = () => {
         <ul>
           <ListItems/>
         </ul>
+
+        <Nav size="200px">
+          <h1>A Child</h1>
+        </Nav>
     </div>
   );
 };
