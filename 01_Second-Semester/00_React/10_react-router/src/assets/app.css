@@ -1,29 +1,12 @@
-.accordion{
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
+.navigate{
+    background: skyblue;
+    padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 8px 10px;
-    cursor: pointer;
-    background: #fff;
-    position: relative;
+    text-decoration: none;
+    color: black;
 }
 
-.child{
-    padding: 6px 8px;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 8px 10px;
-    z-index: -1;
-    position: relative;
-}
-
-.true {
-    margin-top: -31px;
-}
-.false{
-    transition: 0.5s;
+.navigate:hover{
+    background: deepskyblue;
+    color: white;
 }
