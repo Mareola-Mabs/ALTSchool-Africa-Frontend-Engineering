@@ -1,0 +1,12 @@
+.navigate{
+    background: skyblue;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.navigate:hover{
+    background: deepskyblue;
+    color: white;
+}
