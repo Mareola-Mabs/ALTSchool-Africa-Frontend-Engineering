@@ -6,6 +6,7 @@ import {
   NavLink,
   useSearchParams,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import "./assets/app.css";
 import { useEffect } from "react";
@@ -13,6 +14,12 @@ import { useEffect } from "react";
 // Create a Home Page Component
 const Home = () => {
   const { pathname, search } = useLocation();
+    const navigate = useNavigate()
+
+
+  const goToAbout = () => {
+    navigate("/about");
+  };
 
   if (pathname === "/") {
     alert(`This is the home page, and search param is ${search}`);
@@ -24,6 +31,7 @@ const Home = () => {
         About
       </a>{" "}
       {/* This will cause a page reload*/}
+      <button onClick={goToAbout}>Goto About Page</button>
     </section>
   );
 };
