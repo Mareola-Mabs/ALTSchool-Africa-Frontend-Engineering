@@ -1,6 +1,7 @@
 // Import Route and Routes
 import {Routes, Route} from 'react-router-dom'
 import { useState } from 'react'
+import {flushSync} from 'react-dom'
 import './assets/app.css'
 
 
@@ -10,6 +11,7 @@ const Home = ()=>{
 
   const [pending, setPending] = useState(0)
   const [completed, setCompleted] = useState(0)
+  const [newCount, setNewCount] = useState(0)
 
   function changeState(){
 
@@ -43,6 +45,11 @@ const Home = ()=>{
     setCompleted(completed => completed + 1)
   }
 
+  function changeNewCount(){
+    flushSync(()=> setNewCount(newCount+1))
+    flushSync(()=> setNewCount(newCount+2))
+  }
+
   return(
     <section className="home__container">
       <button onClick={changeState}>Click Me</button>
@@ -53,6 +60,9 @@ const Home = ()=>{
 
       <div>Pending: {pending}</div>
       <div>Completed: {completed}</div>
+
+      <p>{newCount}</p>
+      <button onClick={changeNewCount}>Change New Count</button>
     </section>
   )
 }
