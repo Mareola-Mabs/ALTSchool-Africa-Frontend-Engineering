@@ -42,7 +42,6 @@ const Home = ()=>{
   ]
 
 const [currentItem, setCurrentItem] = useState(0)
-const [news, currentNews] = useState(null)
 
 
 
