@@ -1,5 +1,6 @@
 import "./assets/app.css";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 // Form Without External Library
 const WithoutLibrary = () => {
@@ -124,47 +125,157 @@ const WithoutLibrary = () => {
 };
 
 // Form With React Library
-const WithLibrary = () => {
+const WithReactHookForm = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm();
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const onSubmit = async (formData) => {
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const payload = {
+        id: crypto.randomUUID(),
+        name: formData.name.trim(),
+        description: formData.description?.trim() || null,
+        price: Number(formData.price),
+        compareAtPrice: null,
+        sku: null,
+        barcode: formData.barcode?.trim() || null,
+        quantity: Number(formData.quantity),
+        category: formData.category?.trim() || null,
+        tags: formData.tags?.trim() || null,
+        images: "", // placeholder (API expects string)
+        featured: !!formData.featured,
+        published: !!formData.published,
+        isDefault: null,
+        owner: null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      const res = await fetch("https://api.oluwasetemi.dev/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error(data);
+        setMessage("Failed to create product");
+        return;
+      }
+
+      setMessage("Product created successfully ✅");
+      console.log(payload);
+      reset();
+    } catch (error) {
+      console.error(error);
+      setMessage("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <form action="" method="post">
-      <h2>Create Product (No Form Library)</h2>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h2>Create Product</h2>
 
-      <input name="name" type="text" placeholder="Product Name" required />
+      <input
+        {...register("name", {
+          required: "Product name is required",
+          minLength: 1,
+          maxLength: 500
+        })}
+        type="text"
+        placeholder="Product Name"
+      />
+      {errors.name && <p>{errors.name.message}</p>}
 
-      <input name="price" type="number" placeholder="Enter a Price" required />
+      <input
+        {...register("price", {
+          required: "Price is required",
+          min: 0
+        })}
+        type="number"
+        placeholder="Enter a Price"
+      />
+      {errors.price && <p>{errors.price.message}</p>}
 
-      <label htmlFor="barcode">
-        Barcode Image
-        <input name="barcode" id="barcode" type="file" />
-      </label>
+      <input
+        {...register("barcode")}
+        type="text"
+        placeholder="Barcode (optional)"
+      />
 
-      <input name="category" placeholder="Category" type="text" />
+      <input
+        {...register("category")}
+        type="text"
+        placeholder="Category"
+      />
 
-      <textarea name="description" placeholder="Description" />
+      <textarea
+        {...register("description")}
+        placeholder="Description"
+      />
 
       <label>
-        <input type="checkbox" name="featured" />
+        <input type="checkbox" {...register("featured")} />
         Featured
       </label>
 
-      <label
-        htmlFor="image"
-        style={{ display: "flex", flexDirection: "column" }}
-      >
-        Images
-        <input name="image" id="image" type="file" />
+      {/* UI-only image input */}
+      <label>
+        Product Images
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          {...register("images")}
+        />
       </label>
 
-      <input type="text" name="quantity" min="0" />
+      <input
+        {...register("quantity", {
+          required: "Quantity is required",
+          min: 0
+        })}
+        type="number"
+        placeholder="Quantity"
+      />
+      {errors.quantity && <p>{errors.quantity.message}</p>}
 
-      <input name="tags" placeholder="Tags (comma separated)" type="text" />
+      <input
+        {...register("tags")}
+        type="text"
+        placeholder="Tags (comma separated)"
+      />
 
       <label>
-        <input type="checkbox" name="published" />
+        <input
+          type="checkbox"
+          {...register("published")}
+          defaultChecked
+        />
         Published
       </label>
 
-      <button type="submit">Create Product</button>
+      <button type="submit" disabled={loading}>
+        {loading ? "Creating..." : "Create Product"}
+      </button>
+
+      {message && <p>{message}</p>}
     </form>
   );
 };
@@ -175,7 +286,7 @@ const App = () => {
     <div className="container">
       <div className="parent">
         <WithoutLibrary />
-        <WithLibrary />
+        <WithReactHookForm />
       </div>
     </div>
   );
