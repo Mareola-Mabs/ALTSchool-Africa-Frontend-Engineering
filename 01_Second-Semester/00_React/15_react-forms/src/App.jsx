@@ -6,16 +6,27 @@ import { useState } from "react";
 // Root Component
 function App() {
   const [name, setName] = useState('')
+  const [checked, setChecked] = useState(false)
 
-  function handleChange(e){
+  // To handle text inputs
+  function handleInput(e){
+    e.preventDefault() // not needed
     setName(e.target.value)
     console.log(name)
+  }
+
+  // To handle checkboxes
+  function handleCheckbox(e){
+    setChecked(e.target.checked)
+    console.log(checked)
   }
 
 
   return (
    <form action="">
-     <input type="text" name="name" id="name" value={name} placeholder="Enter Your Name" onChange={handleChange} />
+     <input type="text" name="name" id="name" value={name} placeholder="Enter Your Name" onChange={handleInput} />
+     
+     <input type="checkbox" name="featured" checked={checked} onChange={handleCheckbox} id="" />
    </form>
     
   );
