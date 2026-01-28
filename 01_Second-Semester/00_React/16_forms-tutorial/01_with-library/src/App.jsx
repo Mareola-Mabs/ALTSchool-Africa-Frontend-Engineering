@@ -1,4 +1,11 @@
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
+import {z} from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8)
+})
 
 const App = () => {
   const {
@@ -9,14 +16,14 @@ const App = () => {
   } = useForm({
     defaultValues: {
       email: "test@email.com"
-    }
+    },
+    resolver: zodResolver(schema)
   });
 
   const onSubmit = async (data) => {
     try{
       await new Promise((resolve) => setTimeout(resolve, 1000))
       throw new Error()
-      console.log(data);
     }
     catch(err){
       setError("root", {
@@ -32,13 +39,7 @@ const App = () => {
         <label>
           Email
           <input
-            {...register("email", {
-              required: "Email is Required",
-              pattern: {
-                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                message: "Invalid email address"
-              }
-            })}
+            {...register("email")}
             type="email"
             id="email"
             placeholder="Email"
@@ -48,14 +49,7 @@ const App = () => {
         <label>
           Password
           <input
-            {...register("password", {
-              required: "Password is Required",
-              minLength: {
-                value: 8,
-                message: "Password cannot be less than 8 characters"
-              },
-              validate: (value) => value.includes("2") || "Password must contain the number 2",
-            })}
+            {...register("password")}
             type="password"
             id="password"
             placeholder="Password"
