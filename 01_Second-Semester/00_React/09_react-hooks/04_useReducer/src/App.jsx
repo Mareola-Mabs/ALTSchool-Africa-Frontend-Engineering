@@ -38,7 +38,7 @@ const App = () => {
         <button onClick={()=> dispatch({type: 'reset'})}>Reset</button>
       </div>
 
-      <input type="number" value={value} onChange={(e)=> setValue(Number(e.target.value))}/>
+      <input type="number" onChange={(e)=> setValue(Number(e.target.value))}/>
       <button onClick={()=> dispatch({type: 'set', payload: value})}>Set</button>
     </div>
   );
