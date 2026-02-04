@@ -1,5 +1,28 @@
 import { Route, Routes, NavLink, Link, useParams, useNavigate } from "react-router-dom";
 import posts from "./posts";
+import "./App.css"
+
+
+// Home Page
+const Home = () => {
+  return (
+    <div className="container">
+      <h1 className="page-title">Blog</h1>
+
+      <div className="post-list">
+        {posts.map((post) => (
+          <div key={post.id} className="post-card">
+            <h3 className="post-title">{post.title}</h3>
+            <p className="post-excerpt">{post.excerpt}</p>
+            <Link className="read-more" to={`/posts/${post.id}`}>
+              Read more →
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 
 // Detail Page
@@ -11,51 +34,44 @@ function PostDetail() {
 
   if (!post) {
     return (
-      <div>
+      <div className="container">
         <h2>Post Not Found</h2>
-      <button onClick={() => navigate(-1)}>Go back</button>
+        <button className="btn" onClick={() => navigate(-1)}>Go back</button>
       </div>
-    )
+    );
   }
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
+    <div className="container">
+      <article className="post-detail">
+        <h1 className="post-detail-title">{post.title}</h1>
+        <p className="post-content">{post.content}</p>
 
-      <button onClick={() => navigate(-1)} style={{marginRight: "10px"}}>Go back</button>
-      <button onClick={() => navigate("/")}>Home</button>
+        <div className="button-group">
+          <button className="btn secondary" onClick={() => navigate(-1)}>
+            Go back
+          </button>
+          <button className="btn" onClick={() => navigate("/")}>
+            Home
+          </button>
+        </div>
+      </article>
     </div>
   );
 }
 
 
-// Home Page
-const Home = () => {
+// Error Page
+const NotFound = () => {
   return (
-    <div>
-      <h1>Blog</h1>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.excerpt}</p>
-          <Link to={`/posts/${post.id}`}>Read more</Link>
-        </div>
-      ))}
+    <div className="container not-found">
+      <h1>404</h1>
+      <p>Page not found</p>
+      <Link className="btn" to="/">Go back home</Link>
     </div>
   );
 };
 
-// Error Page
-const NotFound = () => {
-  return (
-    <div style={{ padding: "2rem" }}>
-      <h1>404</h1>
-      <p>Page not found</p>
-      <Link to="/">Go back home</Link>
-    </div>
-  );
-};
 
 const App = () => {
   return (

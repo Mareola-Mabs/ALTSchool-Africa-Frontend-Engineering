@@ -1,0 +1,140 @@
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  line-height: 1.7;
+}
+
+/* Layout */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.page-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #1e40af;
+}
+
+/* Home page */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-card {
+  background: #ffffff;
+  padding: 1.5rem 1.75rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.post-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-excerpt {
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  text-decoration: none;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* Post detail */
+.post-detail {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.post-detail-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1e40af;
+}
+
+.post-content {
+  color: #374151;
+  white-space: pre-line;
+}
+
+/* Buttons */
+.button-group {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #2563eb;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #1e40af;
+}
+
+.btn.secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.btn.secondary:hover {
+  background-color: #d1d5db;
+}
+
+/* 404 page */
+.not-found {
+  text-align: center;
+}
+
+.not-found h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.not-found p {
+  margin-bottom: 1.5rem;
+  color: #6b7280;
+}
