@@ -9,6 +9,7 @@ const Dashboard = lazy(()=> import('./components/Dashboard'))
 
 import { Navigate } from "react-router-dom";
 
+
 const AuthDashboard = () => {
 
   if (!isAuthenticated()) {
@@ -23,7 +24,6 @@ const App = ()=>{
 
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
       {/* <Route path="/" element={<Home />} /> */}
       <Route path="/" element={<Login />} />
@@ -34,7 +34,6 @@ const App = ()=>{
       {/* 404 route */}
       <Route path="*" element={<NotFound />} />
     </Routes>
-    </Suspense>
   )
 }
 
