@@ -19,10 +19,6 @@ const Login = () => {
         setError("Password Cannot be Empty")
         return
     }
-    if (password === ""){
-        setError("Password Cannot be Empty")
-        return
-    }
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
     if (!passwordRegex.test(password)){
@@ -35,7 +31,7 @@ const Login = () => {
 
     try {
       const { data } = await axios.post(
-        "https://api.oluwasetemi.dev/auth/register",
+        "https://api.oluwasetemi.dev/auth/login",
         {
           email,
           password,
@@ -48,10 +44,11 @@ const Login = () => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("user", JSON.stringify(data.user));
+
       setLoading(false);
 
       // redirect
-      window.location.href = "/login";
+      window.location.href = "/dashboard";
     } catch (error) {
       console.error(error.response?.data || error.message);
       setError(error.message);
