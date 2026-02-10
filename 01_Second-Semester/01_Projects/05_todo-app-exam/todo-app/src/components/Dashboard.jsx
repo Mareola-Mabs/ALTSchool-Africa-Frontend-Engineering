@@ -16,6 +16,8 @@ const Dashboard = () => {
   const [createError, setCreateError] = useState("");
   const [createLoading, setCreateLoading] = useState(false);
 
+  const [viewDesc, setViewDesc] = useState(null)
+
   // Track the todo being edited
   const [editModalTodo, setEditModalTodo] = useState(null);
 
@@ -262,6 +264,8 @@ const Dashboard = () => {
     );
   }
 
+
+
   return (
     <div className="min-h-screen bg-linear-to-br from-black via-zinc-900 to-blue-950 text-white">
       {/* Navbar */}
@@ -312,12 +316,11 @@ const Dashboard = () => {
                 >
                   <div>
                     <div className="font-medium text-white">{todo.name}</div>
-                    <Link
-                      to={`/todos/${todo.id}`}
-                      className="text-sm text-blue-500 hover:text-blue-400"
-                    >
+                    <button onClick={()=> setViewDesc(viewDesc === todo.id? null : todo.id)} className="text-sm cursor-pointer text-blue-500 hover:text-blue-400">
                       View Description
-                    </Link>
+                    </button>
+                    
+                    {viewDesc === todo.id? <div className="w-full bg-gray-400">{todo.description}</div>: null}
                   </div>
 
                   {/* Right Side Buttons */}
